@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH << File.expand_path(File.dirname(__FILE__) + '/../lib/')
+
+require 'baseball_stats'
+require 'thor'
+
+class BaseballCLI < Thor
+  desc "analyze BATTING_FILE, MASTER_FILE", "Analyze baseball statistics on the supplied (or default) batting data"
+  def analyze(batting_file=nil, master_file=nil)
+    data_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '/data') )
+     batting_file_name = batting_file || data_dir + '/Batting-07-12.csv'
+    master_file_name = master_file || data_dir + '/Master-small.csv'
+    most_improved = Baseball::Questions::MostImproved.new
+    slugging = Baseball::Questions::TeamSlugging.new
+    triple_crown_2011 = Baseball::Questions::TripleCrown.new year: 2011
+    triple_crown_2012 = Baseball::Questions::TripleCrown.new year: 2012
+    questions = [most_improved, slugging, triple_crown_2011, triple_crown_2012]
+    options = {batting_file: batting_file_name, master_file: master_file_name, questions: questions}
+    stat = Baseball::Statistician.new options
+    stat.analyze
+  end
+end
+
+BaseballCLI.start(ARGV)
