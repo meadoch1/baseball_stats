@@ -33,7 +33,9 @@ The program is incomplete as of this date.  The following are yet to be addresse
 3. Feature testing of the CLI is yet to be implemented.
 4. Computation for the Triple Crown winner is incomplete.  A better understanding of the parameters for winning the Triple Crown is needed and possibly more data is required.
 5. A review of the tests to ensure adequate coverage is pending.  Thus more tests might be merited.
-
+6. A refactoring of the question objects to move responsibilities for formatting output is needed.
+7. A command in the CLI to allow setting configuration parameters for the data files and the fantasy scoring values is needed.
+8. Utilization of the Master file to have player's names to display is yet to be implemented.
 
 ## Contributing
 
